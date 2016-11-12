@@ -1,0 +1,27 @@
+es_master:
+  image: es:1.0
+  user: elsearch
+  ports:
+    - "9200:9200" 
+    - "9300:9300" 
+  volumes:
+    - $PWD/data:/data
+    - $PWD/config-master:/elasticsearch/config 
+  command: "/elasticsearch/bin/elasticsearch"
+  restart: always
+
+
+es_slave:
+  image: es:1.0
+  user: elsearch
+  links:
+    - es_master
+  volumes:
+    - $PWD/data:/data
+    - $PWD/config-slave:/elasticsearch/config 
+  command: "/elasticsearch/bin/elasticsearch -Des.discovery.zen.ping.unicast.hosts=es_master:9300"
+  restart: always
+
+
+
+
