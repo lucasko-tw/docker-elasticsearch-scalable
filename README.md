@@ -1,4 +1,4 @@
-## docker-compose.yml for Elasticsearch Cluster wi
+## docker-compose.yml for scaling elasticsearch nodes to cluster
 This is a example for scaling es's nodes by docker-compose 
 
 ### config-master/elasticsearch.yml (Master)
