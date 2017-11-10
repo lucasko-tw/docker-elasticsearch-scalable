@@ -4,9 +4,7 @@ es_master:
     - "9200:9200" 
     - "9300:9300" 
   volumes:
-    - $PWD/data:/data
-    - $PWD/config-master:/elasticsearch/config 
-  command: "/elasticsearch/bin/elasticsearch"
+    - $PWD/config-master:/usr/share/elasticsearch/config 
   restart: always
 
 
@@ -15,11 +13,9 @@ es_slave:
   links:
     - es_master
   volumes:
-    - $PWD/data:/data
-    - $PWD/config-slave:/elasticsearch/config 
-  command: "/elasticsearch/bin/elasticsearch -Des.discovery.zen.ping.unicast.hosts=es_master:9300"
+    - $PWD/config-slave:/usr/share/elasticsearch/config
+  command: "-Des.discovery.zen.ping.unicast.hosts=es_master:9300"
   restart: always
-
 
 
 
