@@ -17,27 +17,22 @@ docker-compose up -d
 
 ```yml
 es_master:
-  image: es:1.0
-  user: elsearch
+  image: lucasko/elasticsearch
   ports:
-    - "9200:9200"
-    - "9300:9300"
+    - "9200:9200" 
+    - "9300:9300" 
   volumes:
-    - $PWD/data:/data
-    - $PWD/config-master:/elasticsearch/config
-  command: "/elasticsearch/bin/elasticsearch"
+    - $PWD/config-master:/usr/share/elasticsearch/config 
   restart: always
 
 
 es_slave:
-  image: es:1.0
-  user: elsearch
+  image: lucasko/elasticsearch
   links:
     - es_master
   volumes:
-    - $PWD/data:/data
-    - $PWD/config-slave:/elasticsearch/config
-  command: "/elasticsearch/bin/elasticsearch -Des.discovery.zen.ping.unicast.hosts=es_master:9300"
+    - $PWD/config-slave:/usr/share/elasticsearch/config
+  command: "-Des.discovery.zen.ping.unicast.hosts=es_master:9300"
   restart: always
 ```
 
@@ -53,8 +48,6 @@ cluster.name: "lucasko"
 node.name: "masterNode"
 node.master: true
 node.data: true
-path.data: /data/data
-path.logs: /data/logs
 ```
 
 ### config-slave/elasticsearch.yml (slave)
@@ -64,8 +57,6 @@ path.logs: /data/logs
 network.host: 0.0.0.0
 cluster.name: "lucasko"
 node.data: true
-path.data: /data/data
-path.logs: /data/logs
 ```
 ### Run docker-compose
 
@@ -85,7 +76,7 @@ path.logs: /data/logs
 
 ```sh
    docker-compose scale es_slave=3
-	
+   docker-compose scale es_slave=1	
 ```
 
 ![One master and three slaves ](https://github.com/lucasko-tw/docker-compose-elasticsearch-cluster-scale/blob/master/one-master-three-slaves.png)

@@ -100,7 +100,5 @@ node.master: true
 node.data: true
 #discovery.zen.ping.multicast.enabled: false 
 
-path.data: /usr/share/elasticsearch/data
-path.logs: /usr/share/elasticsearch/logs
 
 
