@@ -4,10 +4,13 @@ This is a example for scaling es's nodes by docker-compose
 ## Quick Start
 
 ```
+https://github.com/lucasko-tw/docker-elasticsearch-scalable.git
+
+cd docker-elasticsearch-scalable/
+
 docker pull lucasko/elasticsearch
 
 docker-compose up -d
-
 ```
 
 ### docker-compose.yml
