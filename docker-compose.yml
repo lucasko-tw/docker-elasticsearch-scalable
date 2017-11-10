@@ -1,6 +1,5 @@
 es_master:
-  image: es:1.0
-  user: elsearch
+  image: lucasko/elasticsearch
   ports:
     - "9200:9200" 
     - "9300:9300" 
@@ -12,8 +11,7 @@ es_master:
 
 
 es_slave:
-  image: es:1.0
-  user: elsearch
+  image: lucasko/elasticsearch
   links:
     - es_master
   volumes:
